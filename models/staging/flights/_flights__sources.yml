@@ -1,0 +1,149 @@
+sources:
+ - name: demo_src
+   description: Данные из БД авиперелетов
+   schema: demo_src
+   tables:
+    - name: aircrafts
+      description: Модели самолётов
+      columns:
+        - name: aircraft_code
+          description: Код модели самолётов
+        - name: model
+          description: Название модели самолёта
+        - name: range
+          description: Неизвестное поле
+    - name: airports
+      description: Аэропорты
+      columns:
+        - name: airport_code
+          description: Код аэропорта
+        - name: airport_name
+          description: Код аэропорта
+        - name: city
+          description: Код аэропорта
+        - name: coordinates
+          description: Код аэропорта
+        - name: timezone
+          description: Название модели самолёта
+    - name: airports_data
+      description: Аэропорты
+      columns:
+        - name: airport_code
+          description: Код аэропорта
+        - name: airport_name
+          description: Код аэропорта
+        - name: city
+          description: Код аэропорта
+        - name: coordinates
+          description: Код аэропорта
+        - name: timezone
+          description: Название модели самолёта
+    - name: boarding_passes
+      description: Аэропорты
+      columns:
+        - name: ticket_no
+          description: Код аэропорта
+        - name: flight_id
+          description: Код аэропорта
+        - name: boarding_no
+          description: Код аэропорта
+        - name: seat_no
+          description: Код аэропорта
+    - name: aircrafts_data
+      description: Данные самолётов
+      columns:
+        - name: aircraft_code
+          description: Код модели самолётов
+        - name: model
+          description: Название модели самолёта
+        - name: range
+          description: Неизвестное поле
+    - name: flights
+      description: Данные самолётов
+      columns:
+        - name: flight_id
+          description: Код модели самолётов
+        - name: flight_no
+          description: Название модели самолёта
+        - name: scheduled_departure
+        - name: scheduled_arrival
+        - name: departure_airport
+        - name: arrival_airport
+        - name: status
+        - name: aircraft_code
+        - name: actual_departure
+        - name: actual_arrival
+          description: Неизвестное поле    
+    - name: flights_v
+      description: Something
+      columns: 
+        - name: flight_id
+        - name: flight_no
+        - name: scheduled_departure
+        - name: scheduled_departure_local
+        - name: scheduled_duration
+        - name: departure_airport
+        - name: departure_airport_name
+        - name: departure_city
+        - name: arrival_airport
+        - name: arrival_airport_name
+        - name: arrival_city
+        - name: status
+        - name: aircraft_code
+        - name: actual_departure
+        - name: actual_departure_local
+        - name: actual_arrival
+        - name: actual_arrival_local
+        - name: actual_duration
+    - name: routes
+      description: Something
+      columns:
+        - name: flight_no
+        - name: departure_airport
+        - name: departure_airport_name
+        - name: departure_city
+        - name: arrival_airport
+        - name: arrival_airport_name
+        - name: arrival_city
+        - name: aircraft_code
+        - name: duration
+        - name: days_of_week
+    - name: seats
+      description: Something
+      columns:
+        - name: aircraft_code
+        - name: seat_no
+        - name: fare_conditions
+    - name: ticket_flights
+      description: Something
+      columns:
+        - name: ticket_no
+        - name: flight_id
+        - name: fare_conditions
+        - name: amount
+    - name: tickets
+      description: Something
+      columns:
+        - name: ticket_no
+        - name: book_ref
+        - name: passenger_id
+        - name: passenger_name
+        - name: contact_data       
+    - name: bookings
+      description: Данные самолётов
+      columns:
+        - name: book_ref
+          description: Код
+        - name: book_date
+          description: Дата бронирования
+        - name: total_amount
+          description: Деньги хз
+      freshness:
+        warn_after:
+          count: 60000
+          period: hour
+        error_after:
+          count: 10000
+          period: day 
+        filter: current_timestamp::date - book_date::date < 30000
+      loaded_at_field: book_date::timestamp
